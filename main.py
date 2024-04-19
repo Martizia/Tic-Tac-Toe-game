@@ -9,7 +9,9 @@ while playing:
     match game_mode:
         case '1':
             two_players()
+            playing = False
         case '2':
             player_AI()
+            playing = False
         case _:
             playing = False

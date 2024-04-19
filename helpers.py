@@ -1,3 +1,5 @@
+import random
+
 def draw_board(spots):
     board = (f" {spots[1]} | {spots[2]} | {spots[3]} \n"
              f" {spots[4]} | {spots[5]} | {spots[6]} \n"
@@ -24,3 +26,13 @@ def check_winner(spots, p_turn):
         return True
     else:
         return False
+
+
+def random_ai_choice(player_choices, ai_choices):
+    select_choice = True
+    while select_choice:
+        choice = random.randint(1, 9)
+        if choice not in player_choices and choice not in ai_choices:
+            return choice
+        select_choice = False
+
