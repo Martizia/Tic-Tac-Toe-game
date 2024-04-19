@@ -12,10 +12,11 @@ def two_players():
     prev_turn = -1
     player1 = input("Player 1, please enter your name: ")
     player2 = input("Player 2, please enter your name: ")
-    draw_board(example_spots)
     while two_playing:
         # Clear screen
         os.system('cls' if os.name == 'nt' else 'clear')
+        draw_board(example_spots)
+        print("Use board from above to choose cell number in which you want to place your mark")
         draw_board(spots)
         # If an invalid turn has been made, let the player know
         if prev_turn == turn:
@@ -27,6 +28,7 @@ def two_players():
         else:
             player = player2
         print("Player " + player + "'s turn: Please enter a number from 1 to 9 or 'q' to quit")
+        print(f"You are using '{check_turn(turn % 2 + 1)}' mark")
         # Get player input
         choice = input()
         if choice == 'q':
@@ -34,12 +36,12 @@ def two_players():
         # Check if the player gave a number from 1 to 9
         elif str.isdigit(choice) and int(choice) in example_spots:
             # Check if the spot is empty
-            if not example_spots[int(choice)] in {"X", "O"}:
+            if not spots[int(choice)] in {"X", "O"}:
                 # Update the board if valid input
                 turn += 1
-                example_spots[int(choice)] = check_turn(turn)
+                spots[int(choice)] = check_turn(turn)
         # Check if the game is ended and someone has won
-        if check_winner(spots):
+        if check_winner(spots, check_turn(turn)):
             complete = True
             two_playing = False
         if turn == 9 and not complete:
